@@ -1,7 +1,7 @@
 
 Name: app-transmission
 Epoch: 1
-Version: 1.1.0
+Version: 1.6.5
 Release: 1%{dist}
 Summary: Transmission
 License: GPLv3
@@ -39,11 +39,6 @@ cp -r * %{buildroot}/usr/clearos/apps/transmission/
 
 install -D -m 0644 packaging/transmission-daemon.php %{buildroot}/var/clearos/base/daemon/transmission-daemon.php
 
-if [ -d %{buildroot}/usr/clearos/apps/transmission/libraries_zendguard ]; then
-    rm -rf %{buildroot}/usr/clearos/apps/transmission/libraries
-    mv %{buildroot}/usr/clearos/apps/transmission/libraries_zendguard %{buildroot}/usr/clearos/apps/transmission/libraries
-fi
-
 %post
 logger -p local6.notice -t installer 'app-transmission - installing'
 
@@ -80,7 +75,6 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/transmission/packaging
-%exclude /usr/clearos/apps/transmission/tests
 %dir /usr/clearos/apps/transmission
 /usr/clearos/apps/transmission/deploy
 /usr/clearos/apps/transmission/language
